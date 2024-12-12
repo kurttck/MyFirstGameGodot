@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg4uopesg0uvx"]
+
+[ext_resource type="Script" path="res://UserInterface/player_ui.gd" id="1_uf6bm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgeqi"]
+bg_color = Color(0, 0, 0, 0.356863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njfrg"]
+bg_color = Color(0.559549, 0, 0, 1)
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uf6bm")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_direction = 2
+layout_mode = 0
+offset_left = 28.0
+offset_top = 33.0
+offset_right = 204.0
+offset_bottom = 49.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qgeqi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_njfrg")
+max_value = 1.0
+value = 1.0
+show_percentage = false

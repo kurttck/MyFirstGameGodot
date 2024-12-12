@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm63wkfwct52j"]
+[gd_scene load_steps=9 format=3 uid="uid://cm63wkfwct52j"]
 
 [ext_resource type="Texture2D" uid="uid://cmth46sebvl8t" path="res://Enemies/assets/tile_0008.png" id="1_sc8i4"]
 [ext_resource type="Script" path="res://Enemies/enemy_01.gd" id="1_uh21r"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qut24"]
+radius = 11.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bolgw"]
+size = Vector2(16, 6)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_halis"]
-radius = 12.0
+radius = 9.0
 
 [sub_resource type="Animation" id="Animation_fh4cn"]
 resource_name = "idle"
@@ -65,6 +71,21 @@ script = ExtResource("1_uh21r")
 [node name="Sprite" type="Sprite2D" parent="Marker"]
 texture = ExtResource("1_sc8i4")
 
+[node name="Area2D" type="Area2D" parent="Marker"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker/Area2D"]
+shape = SubResource("CircleShape2D_qut24")
+debug_color = Color(0.991263, 0.0718993, 0.128378, 0.42)
+
+[node name="HurtBox" type="Area2D" parent="Marker"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker/HurtBox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_bolgw")
+debug_color = Color(0, 0.644765, 0.274294, 0.42)
+
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_halis")
 
@@ -72,3 +93,5 @@ shape = SubResource("CircleShape2D_halis")
 libraries = {
 "": SubResource("AnimationLibrary_31d58")
 }
+
+[connection signal="body_entered" from="Marker/Area2D" to="." method="_on_area_2d_body_entered"]
