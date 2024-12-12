@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm63wkfwct52j"]
+
+[ext_resource type="Texture2D" uid="uid://cmth46sebvl8t" path="res://Enemies/assets/tile_0008.png" id="1_sc8i4"]
+[ext_resource type="Script" path="res://Enemies/enemy_01.gd" id="1_uh21r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_halis"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_fh4cn"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4995, 1, 1.4985, 1.998),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, 50), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4995, 1, 1.4985, 1.998),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, 50), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pe6by"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_31d58"]
+_data = {
+"RESET": SubResource("Animation_pe6by"),
+"idle": SubResource("Animation_fh4cn")
+}
+
+[node name="Enemy01" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_uh21r")
+
+[node name="Marker" type="Marker2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Marker"]
+texture = ExtResource("1_sc8i4")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_halis")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_31d58")
+}
